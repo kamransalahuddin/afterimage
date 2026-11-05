@@ -1,0 +1,36 @@
+# Render Blueprint: the FastAPI backend (Docker) and its Postgres database.
+# The frontend is deployed separately on Vercel (see frontend/vercel.json).
+services:
+  - type: web
+    name: afterimage-api
+    runtime: docker
+    dockerContext: ./backend
+    dockerfilePath: ./backend/Dockerfile
+    plan: free
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: AFTERIMAGE_DATABASE_URL
+        fromDatabase:
+          name: afterimage-db
+          property: connectionString
+      - key: AFTERIMAGE_MASTER_KEY
+        generateValue: true
+      - key: AFTERIMAGE_AUDIT_SECRET
+        generateValue: true
+      - key: AFTERIMAGE_ADMIN_TOKEN
+        generateValue: true
+      - key: AFTERIMAGE_TRUST_PROXY_HEADERS
+        value: "true"
+      # The Vercel site's URL, e.g. https://afterimage.vercel.app
+      - key: AFTERIMAGE_PUBLIC_BASE_URL
+        sync: false
+      # Same value as above (comma-separate several origins if needed).
+      - key: AFTERIMAGE_CORS_ORIGINS
+        sync: false
+
+databases:
+  - name: afterimage-db
+    plan: free
+    databaseName: afterimage
+    user: afterimage

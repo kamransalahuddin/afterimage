@@ -20,7 +20,7 @@ async function parseError(res: Response): Promise<ApiError> {
   return new ApiError(res.status, "http_error", "Something went wrong. Please try again.");
 }
 
-/** Empty in dev (Vite proxies /api). In production, the API origin, e.g. https://afterimage-api.onrender.com */
+/** Empty in dev (Vite proxies /api). In production, the API origin, e.g. https://afterimage-api-xe4u.onrender.com */
 const API_BASE = (import.meta.env.VITE_API_URL ?? "").replace(/\/$/, "");
 
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {

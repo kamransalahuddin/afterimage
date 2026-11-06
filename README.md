@@ -2,6 +2,8 @@
 
 Redact screenshots, photos and PDFs before you share them.
 
+**Live demo: [afterimage-six.vercel.app](https://afterimage-six.vercel.app)** (the free-tier API sleeps when idle, so the first upload can take up to a minute)
+
 AFTERIMAGE finds sensitive information in screenshots, photos and PDFs, lets you decide what to remove, **permanently** redacts it, and shares the clean file through encrypted, expiring, revocable links.
 
 `UPLOAD → DETECT → REVIEW → REDACT → SHARE`
